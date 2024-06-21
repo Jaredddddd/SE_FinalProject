@@ -15,5 +15,8 @@ def login_route(app: Flask):
         result = db.execute(sql='select password from login where username = %s',
                             args=[data['username']])
         print(result)
-        ok2login = (result[0]['password'] == data['password'])
+        if len(result) == 0:
+            ok2login = False
+        else:
+            ok2login = (result[0]['password'] == data['password'])
         return JsonResponse.success(msg='登录成功', data=result) if ok2login else JsonResponse.fail(msg='登录失败,请重新输入账号和密码')
