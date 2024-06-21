@@ -8,6 +8,12 @@ from datetime import datetime
 import json
 from controller.Builder import CentralController
 
+"""
+建造者模式： controller
+修饰器模式： logger
+单例模式： SQLManager 
+状态模式： State(4个状态)
+"""
 
 # # 创建视图应用，使用改造后的JsonFlask对象
 # app = JsonFlask(__name__)

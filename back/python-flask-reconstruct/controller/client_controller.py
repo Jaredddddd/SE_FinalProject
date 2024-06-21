@@ -2,15 +2,18 @@ from flask import Flask, request
 from json_response import JsonResponse
 from database.database import db
 import json
+from log.logger import log_route
 
 def client_route(app: Flask):
     # client表
     @app.route("/all_client", methods=["GET"])  # 查询（全部）
+    @log_route
     def all_client():
         result = db.get_list(sql='select * from client')
         return JsonResponse.success(msg='查询成功', data=result)
 
     @app.route("/add_client", methods=["POST"])  # 添加（单个）
+    @log_route
     def add_client():
         data = json.loads(request.data)  # 将json字符串转为dict
         isOk = db.modify(sql='insert into client(client_id,client_name,phone_number,address) values(%s,%s,%s,%s)',
@@ -19,6 +22,7 @@ def client_route(app: Flask):
         return JsonResponse.success(msg='添加成功') if isOk else JsonResponse.fail(msg='添加失败')
 
     @app.route("/update_client", methods=["PUT"])  # 修改（单个）
+    @log_route
     def update_client():
         # request.data获取请求体数据
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
@@ -31,6 +35,7 @@ def client_route(app: Flask):
 
 
     @app.route("/delete_client", methods=["DELETE"])  # 删除（单个）
+    @log_route
     def delete_client():
         # request.args获取请求链接中 ? 后面的所有参数；以字典的方式存储
         if 'client_id' not in request.args:
