@@ -264,6 +264,7 @@ export default {
                     _this.handleClose();
                   },
                 });
+                this.$router.push('/main');
               } else {
                 this.$notify.error({
                   title: "错误",

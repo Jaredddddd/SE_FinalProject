@@ -6,12 +6,15 @@ from .good_controller import good_route
 from .purchase_controller import purchase_route
 from .sale_controller import sale_route
 from .staff_controller import staff_route
+from .login_controller import login_route
 
 # 同一个表的路由放在同一个文件
 class Builder():
     def build_Flask(self, name):
         pass
     def build_CORS(self):
+        pass
+    def build_login_route(self):
         pass
     def build_client_route(self):
         pass
@@ -23,6 +26,7 @@ class Builder():
         pass
     def build_sale_route(self):
         pass
+
 
 
 class CCBuilder(Builder):
@@ -37,6 +41,10 @@ class CCBuilder(Builder):
     # 为应用程序初始化跨源资源共享
     def build_CORS(self):
         CORS(self.app, supports_credentials=True)
+
+    def build_login_route(self):
+        print('registe login route')
+        login_route(self.app)
 
     def build_client_route(self):
         client_route(self.app)
@@ -62,6 +70,7 @@ class Director:
     def construct_main_controller(self, builder):
         builder.build_Flask('__main__')
         builder.build_CORS()
+        builder.build_login_route()
         builder.build_client_route()
         builder.build_staff_route()
         builder.build_good_route()

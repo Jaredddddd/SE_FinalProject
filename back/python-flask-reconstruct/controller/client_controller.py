@@ -12,7 +12,7 @@ def client_route(app: Flask):
         result = db.execute(sql='select * from client')
         return JsonResponse.success(msg='查询成功', data=result)
 
-    @log_route
+
     @app.route("/add_client", methods=["POST"])  # 添加（单个）
     @log_route
     def add_client():
@@ -23,7 +23,7 @@ def client_route(app: Flask):
         # python三元表达式
         return JsonResponse.success(msg='添加成功') if not isOk else JsonResponse.fail(msg='添加失败')
 
-    @log_route
+
     @app.route("/update_client", methods=["PUT"])  # 修改（单个）
     @log_route
     def update_client():
@@ -36,8 +36,7 @@ def client_route(app: Flask):
         isOk = db.execute(sql='update client set client_name=%s,phone_number=%s,address=%s where client_id=%s',  # 改为
                         args=[data['client_name'], data['phone_number'], data['address'], data['client_id']])
         return JsonResponse.success(msg='修改成功') if not isOk else JsonResponse.fail(msg='修改失败')
-
-    @log_route
+    
     @app.route("/delete_client", methods=["DELETE"])  # 删除（单个）
     @log_route
     def delete_client():

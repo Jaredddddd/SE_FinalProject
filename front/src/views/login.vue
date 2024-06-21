@@ -8,7 +8,6 @@
     >
       <div class="loginUp">
         <div class="loginLeft">
-          <!-- <img src="../assets/login/logo.png" alt="" srcset=""> -->
           <img
             src="../assets/login/sysu.jpg"
             alt=""
@@ -25,7 +24,6 @@
           <div class="loginBg"></div>
           <div class="loginRight">
             <Row class="loginRow">
-
               <el-tabs
                 v-model="tabName"
                 @tab-click="changeTabName"
@@ -85,15 +83,17 @@
                       size="large"
                       :loading="loading"
                       long
+                      @click="submitLogin"
                     >
                       <span
-                        v-if="true"
+                        v-if="!loading"
                         style="letter-spacing: 20px; font-weight: bold"
-                        ><router-link to="/main" class="link-text">登录</router-link
-                        ></span
-                      >
-                      <span v-else>正在登录...请稍后}</span>
+                      >登录</span>
+                      <span v-else>正在登录...请稍后</span>
                     </el-button>
+                  </el-row>
+                  <el-row v-if="errorMessage" style="color: red; margin-top: 10px;">
+                    {{ errorMessage }}
                   </el-row>
                 </el-tab-pane>
               </el-tabs>
@@ -107,8 +107,9 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  components: {},
   data() {
     return {
       saoMaFx: false,
@@ -141,6 +142,7 @@ export default {
           },
         ],
       },
+      errorMessage: null,
     };
   },
   methods: {
@@ -150,65 +152,34 @@ export default {
           id: "qywxsmqywxsm",
           appid: "wwf94bb44e76e308f8",
           agentid: "1000002",
-          // redirect_uri: "https://artskyhome.com:8080/%23/login",
           state: "LJW1314520",
           href: "",
         });
       }
     },
-    afterLogin(res) {
-      let accessToken = res.result;
-      this.setStore("accessToken", accessToken);
-      userInfo().then((res) => {
-        if (res.success) {
-          delete res.result.permissions;
-          let roles = [];
-          res.result.roles.forEach((e) => {
-            roles.push(e.name);
+    submitLogin() {
+      console.log("登录");
+      this.$axios.post("/login", this.form).then((res) => {
+        if (res.code == 200) {
+          let _this = this;
+          this.$notify.success({
+            title: "成功",
+            message: res.msg,
+            duration: 2000,
           });
-          delete res.result.roles;
-          this.setStore("roles", roles);
-          this.setStore("saveLogin", this.saveLogin);
-          if (this.saveLogin) {
-            Cookies.set("userInfo", JSON.stringify(res.result), {
-              expires: 7,
-            });
-          } else {
-            Cookies.set("userInfo", JSON.stringify(res.result));
-          }
-          this.setStore("userInfo", res.result);
-          this.$store.commit("setAvatarPath", res.result.avatar);
-          util.initRouter(this);
-          this.$router.push({
-            name: "home_index",
-          });
+          this.$router.push('/main');
         } else {
-          this.loading = false;
+          this.$notify.error({
+            title: "错误",
+            message: res.msg,
+            duration: 2000,
+          });
         }
       });
-    },
-    submitLogin() {
-      // this.$refs.usernameLoginForm.validate((valid) => {
-      //   if (valid) {
-          this.loading = true;
-          login({
-            username: this.form.username,
-            password: this.form.password,
-            // code: this.form.imgCode,
-            // captchaId: this.captchaId,
-            saveLogin: this.saveLogin,
-          }).then((res) => {
-            if (res.success) {
-              this.afterLogin(res);
-            } else {
-              this.loading = false;
-            }
-          });
-      //   }
-      // });
+
+
     },
   },
-
 };
 </script>
 
