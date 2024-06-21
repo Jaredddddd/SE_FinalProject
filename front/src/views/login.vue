@@ -8,6 +8,83 @@
           <span class="title">超市库存管理系统</span>
         </div>
       </div>
+      <div class="loginMiddle">
+        <div class="login-background">
+          <div class="loginBg"></div>
+          <div class="loginRight">
+            <Row class="loginRow">
+              <el-tabs v-model="tabName" @tab-click="changeTabName" class="loginTab" style="width: 390px; height: 30px;margin: 0 auto;">
+                <el-tab-pane label="账号密码登录" name="userAndPassword" class="zhanghao">
+                  <el-form ref="usernameLoginForm" :model="form" :rules="usernameLoginFormRules" class="form">
+                    <el-form-item prop="username" class="loginInput">
+                      <el-row>
+                        <el-input v-model="form.username" size="large" clearable placeholder="登录账号" autocomplete="off">
+                          <i class="iconfont icon-yonghu" slot="prefix" style="line-height: 50px"></i>
+                        </el-input>
+                      </el-row>
+                    </el-form-item>
+                    <el-form-item prop="password">
+                      <el-input style="height: 50px; line-height: 50px" type="password" v-model="form.password" size="large" placeholder="请输入登录密码" password autocomplete="off">
+                        <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
+                      </el-input>
+                    </el-form-item>
+                  </el-form>
+                  <el-row>
+                    <el-button class="login-btn" type="primary" size="large" :loading="loading" long @click="submitLogin">
+                      <span v-if="!loading" style="letter-spacing: 20px; font-weight: bold">登录</span>
+                      <span v-else>正在登录...请稍后</span>
+                    </el-button>
+                  </el-row>
+                  <el-row v-if="errorMessage" style="color: red; margin-top: 10px;">
+                    {{ errorMessage }}
+                  </el-row>
+                </el-tab-pane>
+                <el-tab-pane label="注册" name="register">
+                  <el-form ref="registerForm" :model="registerForm" :rules="registerFormRules" class="form">
+                    <el-form-item prop="username">
+                      <el-input v-model="registerForm.username" size="large" clearable placeholder="注册账号" autocomplete="off">
+                        <i class="iconfont icon-yonghu" slot="prefix" style="line-height: 50px"></i>
+                      </el-input>
+                    </el-form-item>
+                    <el-form-item prop="password">
+                      <el-input type="password" v-model="registerForm.password" size="large" placeholder="请输入密码" autocomplete="off">
+                        <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
+                      </el-input>
+                    </el-form-item>
+                    <el-form-item prop="confirmPassword">
+                      <el-input type="password" v-model="registerForm.confirmPassword" size="large" placeholder="确认密码" autocomplete="off">
+                        <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
+                      </el-input>
+                    </el-form-item>
+                  </el-form>
+                  <el-row>
+                    <el-button class="login-btn" type="primary" size="large" :loading="loading" long @click="submitRegister">
+                      <span v-if="!loading" style="letter-spacing: 20px; font-weight: bold">注册</span>
+                      <span v-else>正在注册...请稍后</span>
+                    </el-button>
+                  </el-row>
+                  <el-row v-if="registerErrorMessage" style="color: red; margin-top: 10px;">
+                    {{ registerErrorMessage }}
+                  </el-row>
+                </el-tab-pane>
+              </el-tabs>
+            </Row>
+            <p class="loginBottom">欢迎来到无为超市</p>
+          </div>
+        </div>
+      </div>
+    </Row>
+  </div>
+</template>
+  <div class="login">
+    <Row justify="center" align="middle" @keydown.enter.native="submitLogin" style="height: 100%">
+      <div class="loginUp">
+        <div class="loginLeft">
+          <img src="../assets/login/sysu.jpg" alt="" style="width: 100px; height: 95px; position: relative; top: -30px" />
+          <span class="line"></span>
+          <span class="title">超市库存管理系统</span>
+        </div>
+      </div>
 
       <div class="loginMiddle">
         <div class="login-background">
@@ -149,7 +226,17 @@ export default {
       this.$axios.post("/login", this.form).then((res) => {
         if (res.code == 200) {
           this.$notify.success({ title: "成功", message: res.msg, duration: 2000 });
-          this.$router.push('/main');
+          // 根据用户名跳转到不同页面
+          if (this.form.username === 'admin') {
+            this.$router.push('/manager');
+          } else if (this.form.username === 'buyer') {
+            this.$router.push('/buyer');
+          } else if (this.form.username === 'saler') {
+            this.$router.push('/saler');
+          } else {
+            // 默认跳转到 main 页面
+            this.$router.push('/main');
+          }
         } else {
           this.$notify.error({ title: "错误", message: res.msg, duration: 2000 });
         }
@@ -161,7 +248,7 @@ export default {
           this.$notify.success({ title: "成功", message: res.msg, duration: 2000 });
           // this.$router.push('/');
           setTimeout(() => {
-            location.reload(); // Reload the page after 2 seconds
+            location.reload(); // 注册成功后重新加载页面
           }, 1000);
         } else {
           this.$notify.error({ title: "错误", message: res.msg, duration: 2000 });

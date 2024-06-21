@@ -7,6 +7,8 @@ import Commodity from '../views/Commodity.vue'
 import Login from '../views/login.vue'
 import Sale from '../views/sale.vue'
 import Staff from '../views/staff.vue'
+import Buyer from '../views/Buyer.vue'
+import Saler from '../views/Saler.vue'
 
 Vue.use(VueRouter)
 //添加组件（跳转页面）
@@ -17,17 +19,41 @@ const routes = [
   },
 
   {
-    path: '/main', 
+    path: '/manager', 
     component: Main,
     children:[
       //子路由
-      { path: '/purchase', component: Purchase},
-      { path: '/staff', component: Staff},
-      { path: '/client', component: Client},
-      { path: '/commodity', component: Commodity},
-      { path: '/sale', component: Sale}
+      { path: 'purchase', component: Purchase},
+      { path: 'staff', component: Staff},
+      { path: 'client', component: Client},
+      { path: 'commodity', component: Commodity},
+      { path: 'sale', component: Sale}
     ]
-  }
+  },
+  {
+    path: '/buyer', 
+    component: Buyer,
+    children:[
+      //子路由
+      { path: 'purchase', component: Purchase},
+      { path: 'staff', component: Staff},
+      { path: 'client', component: Client},
+      { path: 'commodity', component: Commodity},
+      { path: 'sale', component: Sale}
+    ]
+  },
+  {
+    path: '/saler', 
+    component: Saler,
+    children:[
+      //子路由
+      { path: 'purchase', component: Purchase},
+      { path: 'staff', component: Staff},
+      { path: 'client', component: Client},
+      { path: 'commodity', component: Commodity},
+      { path: 'sale', component: Sale}
+    ]
+  },
 ]
 
 const router = new VueRouter({
