@@ -8,6 +8,7 @@ from log.logger import log_route
 def sale_route(app: Flask):
     #sale表
     @app.route("/all_sale", methods=["GET"])  # 查询（全部）
+    @log_route
     def all_sale():
         result = db.get_list(sql='select * from sale')
         return JsonResponse.success(msg='查询成功', data=result)

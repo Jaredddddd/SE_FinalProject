@@ -7,7 +7,7 @@ from log.logger import log_route
 def client_route(app: Flask):
     # client表
     @app.route("/all_client", methods=["GET"])  # 查询（全部）
-    # @log_route
+    @log_route
     def all_client():
         result = db.get_list(sql='select * from client')
         return JsonResponse.success(msg='查询成功', data=result)
