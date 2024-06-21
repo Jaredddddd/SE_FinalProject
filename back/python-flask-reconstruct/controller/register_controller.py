@@ -22,17 +22,17 @@ def register_route(app: Flask):
         # 检查用户名是否已经存在
         result = db.execute(sql='select username from login where username = %s', args=[data['username']])
         if result:
+            print('already have')
             return JsonResponse.fail(msg='用户名已存在，请选择其他用户名')
-
 
         # 密码加密
         hashed_password = bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt())
 
         # 插入新用户数据
-        result=db.execute(sql='insert into login (username, password) values (%s, %s)',
-                   args=[data['username'], hashed_password.decode('utf-8')])
-        if not result:
-            print(result)
+        # print(f"password: {hashed_password.decode('utf-8')}")
+        result = db.execute(sql='insert into login (username, password) values (%s, %s)',
+                   args=[data['username'], data['password']])
+        if result:
             return JsonResponse.fail(msg='注册失败，请重试')
         return JsonResponse.success(msg='注册成功')
 

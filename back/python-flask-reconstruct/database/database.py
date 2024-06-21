@@ -61,6 +61,7 @@ class SQLManager(object):
             self.state.exe(sql, args)
         # 如果出现执行异常（如违反约束等），回滚事务后返回异常
         except Exception as e:
+            print(f'exception: {e}')
             self.change_state(RollState(self))
             self.state.roll()
             return e

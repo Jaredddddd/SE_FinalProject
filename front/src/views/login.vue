@@ -161,7 +161,10 @@ export default {
       this.$axios.post("/register", this.registerForm).then((res) => {
         if (res.code == 200) {
           this.$notify.success({ title: "成功", message: res.msg, duration: 2000 });
-          this.$router.push('/main');
+          // this.$router.push('/');
+          setTimeout(() => {
+            location.reload(); // Reload the page after 2 seconds
+          }, 1000);
         } else {
           this.$notify.error({ title: "错误", message: res.msg, duration: 2000 });
         }
