@@ -4,6 +4,13 @@ DROP TABLE IF EXISTS sale;
 DROP TABLE IF EXISTS staff;
 DROP TABLE IF EXISTS client;
 DROP TABLE IF EXISTS goods;
+DROP TABLE IF EXISTS login;
+
+-- 创建登录（账号-密码）表
+CREATE TABLE login (
+    username CHAR(10) PRIMARY KEY NOT NULL,
+    password VARCHAR(20) NOT NULL
+);
 
 -- 2. 创建客户表
 CREATE TABLE client (
@@ -230,3 +237,6 @@ update sale set sale_num = 110.0 where sale_id='sa1';
 update purchase set purchase_num = 210.0 where purchase_id='p1';
 
 select * from sale;
+
+insert into login (username, password) VALUES ('admin', '123');
+select * from login
