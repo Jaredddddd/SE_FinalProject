@@ -2,14 +2,17 @@ from flask import Flask, request
 from json_response import JsonResponse
 from database.database import db
 import json
-
+from log.logger import log_route
 def client_route(app: Flask):
     # client表
+    
     @app.route("/all_client", methods=["GET"])  # 查询（全部）
+    @log_route
     def all_client():
         result = db.get_list(sql='select * from client')
         return JsonResponse.success(msg='查询成功', data=result)
 
+    @log_route
     @app.route("/add_client", methods=["POST"])  # 添加（单个）
     def add_client():
         data = json.loads(request.data)  # 将json字符串转为dict
@@ -18,6 +21,7 @@ def client_route(app: Flask):
         # python三元表达式
         return JsonResponse.success(msg='添加成功') if isOk else JsonResponse.fail(msg='添加失败')
 
+    @log_route
     @app.route("/update_client", methods=["PUT"])  # 修改（单个）
     def update_client():
         # request.data获取请求体数据
@@ -29,7 +33,7 @@ def client_route(app: Flask):
                         args=[data['client_name'], data['phone_number'], data['address'], data['client_id']])
         return JsonResponse.success(msg='修改成功') if isOk else JsonResponse.fail(msg='修改失败')
 
-
+    @log_route
     @app.route("/delete_client", methods=["DELETE"])  # 删除（单个）
     def delete_client():
         # request.args获取请求链接中 ? 后面的所有参数；以字典的方式存储
