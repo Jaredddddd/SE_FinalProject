@@ -1,10 +1,11 @@
-2024-06-21 10:32:11,523 - log.logger - INFO - Route accessed: /all_client
-2024-06-21 10:32:11,524 - log.logger - INFO - Method: GET
-2024-06-21 10:34:51,402 - log.logger - INFO - Route accessed: /all_client
-2024-06-21 10:34:51,403 - log.logger - INFO - Method: GET
-2024-06-21 10:34:51,403 - log.logger - INFO - Args: ImmutableMultiDict([])
-2024-06-21 10:34:51,406 - log.logger - INFO - Form: ImmutableMultiDict([])
-2024-06-21 10:35:10,254 - log.logger - INFO - Route accessed: /all_client
-2024-06-21 10:35:10,255 - log.logger - INFO - Method: GET
-2024-06-21 10:35:10,256 - log.logger - INFO - Args: ImmutableMultiDict([])
-2024-06-21 10:35:10,257 - log.logger - INFO - Form: ImmutableMultiDict([])
+2024-06-21 11:28:33,552 - log.logger - INFO - Route accessed: /add_staff
+2024-06-21 11:28:33,552 - log.logger - INFO - Method: POST
+2024-06-21 11:28:33,553 - log.logger - INFO - Args: ImmutableMultiDict([])
+2024-06-21 11:28:33,557 - log.logger - INFO - Form: ImmutableMultiDict([])
+2024-06-21 11:28:33,559 - log.logger - INFO - JSON: {'new': '', 'staff_id': 's6', 'staff_name': 'wenjin', 'department': 'computer', 'salary': '3500', 'phone_number': '11111111111'}
+2024-06-21 11:28:56,027 - log.logger - INFO - Route accessed: /add_staff
+2024-06-21 11:28:56,028 - log.logger - INFO - Method: POST
+2024-06-21 11:28:56,029 - log.logger - INFO - Args: ImmutableMultiDict([])
+2024-06-21 11:28:56,030 - log.logger - INFO - Form: ImmutableMultiDict([])
+2024-06-21 11:28:56,031 - log.logger - INFO - JSON: {'new': '', 'staff_id': 's6', 'staff_name': 'wenjin', 'department': 'purchase', 'salary': '3500', 'phone_number': '11111111111'}
+2024-06-21 11:28:56,035 - log.logger - INFO - Response: {'code': 200, 'msg': 'Ìí¼Ó³É¹¦', 'data': None}

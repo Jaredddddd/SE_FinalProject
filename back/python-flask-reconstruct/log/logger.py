@@ -11,7 +11,7 @@ console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
 
 # 创建一个文件处理器
-file_handler = logging.FileHandler('app.log', mode='a')
+file_handler = logging.FileHandler('./app.log', mode='a')
 file_handler.setLevel(logging.INFO)
 
 # 创建格式器
@@ -35,10 +35,9 @@ def log_route(func):
         logger.info(f'Form: {request.form}')
         logger.info(f'JSON: {request.json}')
         response = func(*args, **kwargs)
-        print(response)
-        logger.info(f'Response: {response.get_json()}')
+        # print(response)
+        logger.info(f'Response: {response.to_dict()}')
         return response
-        # return 
     return wrapper
 
 
