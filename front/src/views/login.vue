@@ -1,84 +1,82 @@
 <template>
-    <div class="login">
-      <Row justify="center" align="middle" @keydown.enter.native="submitLogin" style="height: 100%">
-        <div class="loginUp">
-          <div class="loginLeft">
-            <img src="../assets/login/sysu.jpg" alt="" style="width: 100px; height: 95px; position: relative; top: -30px" />
-            <span class="line"></span>
-            <span class="title">超市库存管理系统</span>
-          </div>
+  <div class="login">
+    <Row justify="center" align="middle" @keydown.enter.native="submitLogin" style="height: 100%">
+      <div class="loginUp">
+        <div class="loginLeft">
+          <img src="../assets/login/sysu.jpg" alt="" style="width: 100px; height: 95px; position: relative; top: -30px" />
+          <span class="line"></span>
+          <span class="title">超市库存管理系统</span>
         </div>
-  
-        <div class="loginMiddle">
-          <div class="login-background">
-            <div class="loginBg"></div>
-            <div class="loginRight">
-              <Row class="loginRow">
-                <el-tabs v-model="tabName" @tab-click="changeTabName" class="loginTab" style="width: 390px; height: 30px;margin: 0 auto;">
-                  <el-tab-pane label="账号密码登录" name="userAndPassword" class="zhanghao">
-                    <el-form ref="usernameLoginForm" :model="form" :rules="usernameLoginFormRules" class="form">
-                      <el-form-item prop="username" class="loginInput">
-                        <el-row>
-                          <el-input v-model="form.username" size="large" clearable placeholder="登录账号" autocomplete="off">
-                            <i class="iconfont icon-yonghu" slot="prefix" style="line-height: 50px"></i>
-                          </el-input>
-                        </el-row>
-                      </el-form-item>
-                      <el-form-item prop="password">
-                        <el-input style="height: 50px; line-height: 50px" type="password" v-model="form.password" size="large" placeholder="请输入登录密码" password autocomplete="off">
-                          <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
-                        </el-input>
-                      </el-form-item>
-                    </el-form>
-                    <el-row>
-                      <el-button class="login-btn" type="primary" size="large" :loading="loading" long @click="submitLogin">
-                        <span v-if="!loading" style="letter-spacing: 20px; font-weight: bold">登录</span>
-                        <span v-else>正在登录...请稍后</span>
-                      </el-button>
-                    </el-row>
-                    <el-row v-if="errorMessage" style="color: red; margin-top: 10px;">
-                      {{ errorMessage }}
-                    </el-row>
-                  </el-tab-pane>
-                  <el-tab-pane label="注册" name="register">
-                    <el-form ref="registerForm" :model="registerForm" :rules="registerFormRules" class="form">
-                      <el-form-item prop="username">
-                        <el-input v-model="registerForm.username" size="large" clearable placeholder="注册账号" autocomplete="off">
+      </div>
+
+      <div class="loginMiddle">
+        <div class="login-background">
+          <div class="loginBg"></div>
+          <div class="loginRight">
+            <Row class="loginRow">
+              <el-tabs v-model="tabName" @tab-click="changeTabName" class="loginTab" style="width: 390px; height: 30px;margin: 0 auto;" >
+                <el-tab-pane label="账号密码登录" name="userAndPassword" class="zhanghaomima">
+                  <el-form ref="usernameLoginForm" :model="form" :rules="usernameLoginFormRules" class="form">
+                    <el-form-item prop="username" class="loginInput">
+                      <el-row>
+                        <el-input v-model="form.username" size="large" clearable placeholder="登录账号" autocomplete="off">
                           <i class="iconfont icon-yonghu" slot="prefix" style="line-height: 50px"></i>
                         </el-input>
-                      </el-form-item>
-                      <el-form-item prop="password">
-                        <el-input type="password" v-model="registerForm.password" size="large" placeholder="请输入密码" autocomplete="off">
-                          <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
-                        </el-input>
-                      </el-form-item>
-                      <el-form-item prop="confirmPassword">
-                        <el-input type="password" v-model="registerForm.confirmPassword" size="large" placeholder="确认密码" autocomplete="off">
-                          <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
-                        </el-input>
-                      </el-form-item>
-                    </el-form>
-                    <el-row>
-                      <el-button class="login-btn" type="primary" size="large" :loading="loading" long @click="submitRegister">
-                        <span v-if="!loading" style="letter-spacing: 20px; font-weight: bold">注册</span>
-                        <span v-else>正在注册...请稍后</span>
-                      </el-button>
-                    </el-row>
-                    <el-row v-if="registerErrorMessage" style="color: red; margin-top: 10px;">
-                      {{ registerErrorMessage }}
-                    </el-row>
-                  </el-tab-pane>
-                </el-tabs>
-              </Row>
-              <p class="loginBottom">欢迎来到无为超市</p>
-            </div>
+                      </el-row>
+                    </el-form-item>
+                    <el-form-item prop="password">
+                      <el-input style="height: 50px; line-height: 50px" type="password" v-model="form.password" size="large" placeholder="请输入登录密码" password autocomplete="off">
+                        <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
+                      </el-input>
+                    </el-form-item>
+                  </el-form>
+                  <el-row>
+                    <el-button class="login-btn" type="primary" size="large" :loading="loading" long @click="submitLogin">
+                      <span v-if="!loading" style="letter-spacing: 20px; font-weight: bold">登录</span>
+                      <span v-else>正在登录...请稍后</span>
+                    </el-button>
+                  </el-row>
+                  <el-row v-if="errorMessage" style="color: red; margin-top: 10px;">
+                    {{ errorMessage }}
+                  </el-row>
+                </el-tab-pane>
+                <el-tab-pane label="注册" name="register">
+                  <el-form ref="registerForm" :model="registerForm" :rules="registerFormRules" class="form">
+                    <el-form-item prop="username">
+                      <el-input v-model="registerForm.username" size="large" clearable placeholder="注册账号" autocomplete="off">
+                        <i class="iconfont icon-yonghu" slot="prefix" style="line-height: 50px"></i>
+                      </el-input>
+                    </el-form-item>
+                    <el-form-item prop="password">
+                      <el-input type="password" v-model="registerForm.password" size="large" placeholder="请输入密码" autocomplete="off">
+                        <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
+                      </el-input>
+                    </el-form-item>
+                    <el-form-item prop="confirmPassword">
+                      <el-input type="password" v-model="registerForm.confirmPassword" size="large" placeholder="确认密码" autocomplete="off">
+                        <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
+                      </el-input>
+                    </el-form-item>
+                  </el-form>
+                  <el-row class="register-btn-row">
+                    <el-button class="register-btn" type="primary" size="large" :loading="loading" long @click="submitRegister">
+                      <span v-if="!loading" style="letter-spacing: 20px; font-weight: bold">注册</span>
+                      <span v-else>正在注册...请稍后</span>
+                    </el-button>
+                  </el-row>
+                  <el-row v-if="registerErrorMessage" style="color: red; margin-top: 10px;">
+                    {{ registerErrorMessage }}
+                  </el-row>
+                </el-tab-pane>
+              </el-tabs>
+            </Row>
+            <p class="loginBottom">欢迎来到无为超市</p>
           </div>
         </div>
-      </Row>
-    </div>
-  </template>
-  
-
+      </div>
+    </Row>
+  </div>
+</template>
 
 <script>
 import axios from 'axios';
@@ -176,8 +174,6 @@ export default {
 };
 </script>
 
-
-
 <style lang="less">
 html,
 body {
@@ -188,7 +184,7 @@ body {
 a {
   font-family: Microsoft YaHei;
 
-  color: #77c8c6;
+  color: #ffffff !important;
 }
 input::-webkit-input-placeholder {
   font-size: 14px;
@@ -202,7 +198,7 @@ a:hover {
 }
 .login {
   height: 100%;
-  background-color: #ffffff;
+  background-color: #ffffff !important;
 
   .ivu-tabs-nav-container {
     line-height: 2;
@@ -243,7 +239,7 @@ a:hover {
   }
   //是否自动登陆字体
   .zhanghao {
-    color: #ffffff;
+    color: #f6f6f6 !important;
   }
   .loginMiddle {
     width: 100%;
@@ -262,13 +258,6 @@ a:hover {
   }
 
   .loginBg {
-    // width: 560px;
-    // height: 560px;
-    // margin-top: 20px;
-    // // background-image: url(../assets/login/star.png);
-    // background-image: url(../assets/login/sysu3.jpg);
-    // background-repeat: no-repeat;
-    // background-position: left bottom;
     width: 560px;
     height: 560px;
     margin-top: 20px;
@@ -281,9 +270,9 @@ a:hover {
   .loginRight {
     width: 450px;
     height: 420px;
-    background-color: rgb(4, 66, 7);
-    border: 1px solid rgb(239, 244, 239);
-    box-shadow: 0px 2px 15px 1px rgba(0, 0, 0, 0.1);
+    background-color: rgb(7, 77, 33);
+    border: 1px solid rgb(241, 242, 241);
+    box-shadow: 0px 2px 15px 1px rgba(240, 239, 239, 0.1);
     border-radius: 5px;
     margin-top: 95px;
     margin-right: 100px;
@@ -310,6 +299,7 @@ a:hover {
   .ivu-tabs-nav .ivu-tabs-tab {
     padding: 8px 42px;
     margin-right: 0px;
+    color: #fff8f8;
   }
   //账号密码下面横线
   .ivu-tabs-ink-bar {
@@ -317,14 +307,9 @@ a:hover {
     width: 86px !important;
     border-radius: 2px;
     margin: 0px 142px;
-    background-color: #d7d0ff;
+    background-color: #fafafa;
   }
-  //账号密码样式
-  .ivu-tabs-nav .ivu-tabs-tab-active,
-  .ivu-tabs-nav .ivu-tabs-tab:hover {
-    color: #ffffff;
-    margin: 0px 92px;
-  }
+
   .loginInput {
     font-size: 18px;
     font-family: Microsoft YaHei;
@@ -335,20 +320,31 @@ a:hover {
 
   .ivu-tabs-bar {
     border-bottom: 0px;
+    color: #f6f6f6;
   }
   //登陆方框
   .login-btn {
     width: 390px;
     height: 50px;
-    background: radial-gradient(circle, rgb(32, 195, 37), rgb(49, 188, 213));
+    background: radial-gradient(circle, rgba(174, 8, 8, 0.992), rgb(179, 4, 4));
     border: 2px solid #61c8c5;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.21);
     border-radius: 4px;
   }
+  .register-btn {
+    width: 390px;
+    height: 50px;
+    background: radial-gradient(circle, rgba(174, 8, 8, 0.992), rgb(179, 4, 4));
+    border: 2px solid #61c8c5;
+    box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.21);
+    border-radius: 4px;
+    margin-top: 5px; /* 调整注册按钮的位置 */
+  }
+
   .login .login-btn,
   .login .other-login {
     margin-top: 40px;
-
+    color: #fcfafa;
   }
 
   .loginBottom {
@@ -379,6 +375,7 @@ a:hover {
   }
   .ivu-form-item {
     margin-bottom: 24px;
+    color: #f6f6f6;
   }
   .ivu-input-wrapper-large .ivu-input-icon {
     line-height: 50px;
@@ -436,7 +433,7 @@ a:hover {
     margin-left: 10px;
     display: flex;
     align-items: center;
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(252, 252, 252, 0.2);
 
     :hover {
       color: #0d4887;
@@ -451,5 +448,41 @@ a:hover {
     height: 100%;
   }
 
+  .register-btn-row {
+    display: flex;
+    justify-content: center; /* 调整注册按钮位置 */
+  }
 }
+
+.zhanghaomima {
+  color: #f6f6f6 !important;
+}
+
+
+
+
+// //账号密码样式
+// .ivu-tabs-nav .ivu-tabs-tab-active,
+// .ivu-tabs-nav .ivu-tabs-tab:hover {
+//   color: #ffffff !important;
+//   margin: 0px 92px;
+// }
+
+
+// //默认颜色
+// .ivu-tabs-nav .ivu-tabs-tab {
+//   border: none;
+//   background-color: transparent;
+// }
+// //鼠标选中的颜色
+// .ivu-tabs-nav .ivu-tabs-tab-active {
+//  color: #26bca8;
+// }
+// //鼠标移上去的颜色
+// .ivu-tabs-nav .ivu-tabs-tab:hover{
+//  color: #26bca8;
+// }
+
+
+
 </style>
