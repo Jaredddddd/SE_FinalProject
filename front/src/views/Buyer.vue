@@ -33,33 +33,33 @@
               <el-menu-item index="1">
                 <i class="el-icon-location"></i>
                 <span slot="title">
-                  <router-link to="/manager/staff" class="link-text">员工信息表</router-link>
+                  <router-link to="/buyer/commodity" class="link-text">商品信息表</router-link>
                 </span>
               </el-menu-item>
               <el-menu-item index="2">
                 <i class="el-icon-menu"></i>
                 <span slot="title">
-                  <router-link to="/manager/client" class="link-text">客户信息表</router-link>
+                  <router-link to="/buyer/purchase" class="link-text">进货信息表</router-link>
                 </span>
               </el-menu-item>
-              <el-menu-item index="3">
+              <!-- <el-menu-item index="3">
                 <i class="el-icon-document"></i>
                 <span slot="title">
-                  <router-link to="/manager/commodity" class="link-text">商品信息表</router-link>
+                  <router-link to="/buyer/commodity" class="link-text">商品信息表</router-link>
                 </span>
-              </el-menu-item>
-              <el-menu-item index="4">
+              </el-menu-item> -->
+              <!-- <el-menu-item index="4">
                 <i class="el-icon-setting"></i>
                 <span slot="title">
-                  <router-link to="/manager/purchase" class="link-text">进货信息表</router-link>
+                  <router-link to="/buyer/purchase" class="link-text">进货信息表</router-link>
                 </span>
               </el-menu-item>
               <el-menu-item index="5">
                 <i class="el-icon-setting"></i>
                 <span slot="title">
-                  <router-link to="/manager/sale" class="link-text">销售信息表</router-link>
+                  <router-link to="/buyer/sale" class="link-text">销售信息表</router-link>
                 </span>
-              </el-menu-item>
+              </el-menu-item> -->
             </el-menu>
           </el-col>
         </el-row>
@@ -73,7 +73,7 @@
 
 <script>
 export default {
-  name: "Main",
+  name: "Buyer",
   data() {
     return {
       activeIndex: "1",
