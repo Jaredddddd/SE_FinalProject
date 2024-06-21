@@ -49,39 +49,16 @@ class SQLManager(object):
         # 获取游标对象；pymysql.cursors.DictCursor指定返回的结果类型为字典，默认是元组类型
         # 在连接没有关闭之前，游标对象可以反复使用
         self.cursor = self.conn.cursor(cursor=pymysql.cursors.DictCursor)
-
-    # 查询多条数据
-    def get_list(self, sql, args=None):
-        self.cursor.execute(sql, args)  # 执行SQL语句，返回受影响的行数
-        return self.cursor.fetchall()  # 返回所有查询结果
-
-    # 查询单条数据
-    def get_one(self, sql, args=None):
-        self.cursor.execute(sql, args)
-        return self.cursor.fetchone()  # 返回单条查询结果
-
-    # 执行单条SQL语句
-    def modify(self, sql, args=None):
-        row = self.cursor.execute(sql, args)
-        self.conn.commit()  # 对数据库的增、删、改操作需要提交事务，否则操作不生效
-        return row > 0  # 若影响的行数>0，说明执行成功，返回True；否则返回False
-
-    # 执行多条SQL语句
-    def multi_modify(self, sql, args=None):
-        rows = self.cursor.executemany(sql, args)
-        self.conn.commit()
-        return rows > 0
-
     # 状态模式
     def change_state(self, state):
         self.state = state
     
     # 执行函数，用来处理各种状态
-    def execute(self, command):
+    def execute(self, sql, args=None):
         # 尝试执行SQL命令
         try:
             self.change_state(ExeState(self))
-            self.state.exe(command)
+            self.state.exe(sql, args)
         # 如果出现执行异常（如违反约束等），回滚事务后返回异常
         except Exception as e:
             self.change_state(RollState(self))
