@@ -21,7 +21,7 @@
     </el-header>
     <el-container>
       
-      <el-aside :width="'164px'">
+      <el-aside :width="'165px'">
         <el-row class="tac">
           <el-col :span="19">
             <el-menu
@@ -96,7 +96,7 @@ export default {
 .main-container {
   background-image: url('../assets/sysu3.jpg');
   /* background-size: 1400px 900px;    */
-  background: cover;
+  background-size: 100% 100%;
   /* background-image: url('../assets/sysu100.png');
   background-size: 400px 400px;  
   background-position: 40% 50%;  */
@@ -105,7 +105,7 @@ export default {
 
 .el-container {
   position: absolute;
-  width: 101.5%;
+  width: 100%;
   height: 100%;
   top: 0px;
   left: 0;
@@ -113,6 +113,8 @@ export default {
 }
 .el-header {
   padding: 0;
+  width: 101%;
+  height: 100%;
   z-index: 1000;
 }
 

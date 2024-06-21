@@ -37,6 +37,8 @@ def client_route(app: Flask):
                         args=[data['client_name'], data['phone_number'], data['address'], data['client_id']])
         return JsonResponse.success(msg='修改成功') if not isOk else JsonResponse.fail(msg='修改失败')
 
+
+
     @log_route
     @app.route("/delete_client", methods=["DELETE"])  # 删除（单个）
     @log_route
