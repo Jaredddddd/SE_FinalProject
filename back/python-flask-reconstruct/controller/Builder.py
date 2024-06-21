@@ -7,6 +7,7 @@ from .purchase_controller import purchase_route
 from .sale_controller import sale_route
 from .staff_controller import staff_route
 from .login_controller import login_route
+from .register_controller import register_route
 
 # 同一个表的路由放在同一个文件
 class Builder():
@@ -25,6 +26,8 @@ class Builder():
     def build_purchase_route(self):
         pass
     def build_sale_route(self):
+        pass
+    def build_register_route(self):
         pass
 
 
@@ -61,6 +64,9 @@ class CCBuilder(Builder):
     def build_sale_route(self):
         sale_route(self.app)
 
+    def build_register_route(self):
+        register_route(self.app)
+
     # 返回构建的 Flask 对象
     def get_result(self):
         return self.app
@@ -76,6 +82,7 @@ class Director:
         builder.build_good_route()
         builder.build_purchase_route()
         builder.build_sale_route()
+        builder.build_register_route()
 
 # 中枢控制器
 class CentralController:
