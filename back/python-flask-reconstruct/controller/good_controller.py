@@ -2,16 +2,19 @@ from flask import Flask, request
 from json_response import JsonResponse
 from database.database import db
 import json
+from log.logger import log_route
 
 def good_route(app: Flask):
     # goods表
     @app.route("/all_goods", methods=["GET"])  # 查询（全部）
+    @log_route
     def all_goods():
         result = db.execute(sql='select * from goods')
         return JsonResponse.success(msg='查询成功', data=result)
 
 
-    @app.route("/add_goods", methods=["POST"])  # 添加（单个）
+    @app.route("/add_goods", methods=["POST"])  # 添加（单个
+    @log_route
     def add_goods():
         data = json.loads(request.data)  # 将json字符串转为dict
         isOk = db.execute(sql='insert into goods(goods_id,goods_name,goods_num) values(%s,%s,%s)',
@@ -21,6 +24,8 @@ def good_route(app: Flask):
 
 
     @app.route("/update_goods", methods=["PUT"])  # 修改（单个）
+    @log_route
+
     def update_goods():
         # request.data获取请求体数据
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
@@ -32,6 +37,7 @@ def good_route(app: Flask):
         return JsonResponse.success(msg='修改成功') if not isOk else JsonResponse.fail(msg='商品编号不可修改')
 
     @app.route("/delete_goods", methods=["DELETE"])  # 删除（单个）
+    @log_route
     def delete_goods():
         # request.args获取请求链接中 ? 后面的所有参数；以字典的方式存储
         if 'goods_id' not in request.args:

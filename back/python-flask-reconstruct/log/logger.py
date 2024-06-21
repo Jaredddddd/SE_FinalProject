@@ -32,13 +32,9 @@ def log_route(func):
         logger.info(f'Route accessed: {request.path}')
         logger.info(f'Method: {request.method}')
         logger.info(f'Args: {request.args}')
-        logger.info(f'Form: {request.form}')
-        logger.info(f'JSON: {request.json}')
         response = func(*args, **kwargs)
-        print(response)
-        logger.info(f'Response: {response.get_json()}')
+        logger.info(f'Response: {response.to_dict()}')
         return response
-        # return 
     return wrapper
 
 

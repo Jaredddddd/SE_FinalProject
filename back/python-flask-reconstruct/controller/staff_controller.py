@@ -2,15 +2,18 @@ from flask import Flask, request
 from json_response import JsonResponse
 from database.database import db
 import json
+from log.logger import log_route
 
 def staff_route(app: Flask):
     # staff表
     @app.route("/all_staff", methods=["GET"])  # 查询（全部）
+    @log_route
     def all_staff():
         result = db.execute(sql='select * from staff')
         return JsonResponse.success(msg='查询成功', data=result)
 
     @app.route("/add_staff", methods=["POST"])  # 添加（单个）
+    @log_route
     def add_staff():
         data = json.loads(request.data)  # 将json字符串转为dict
         isOk = db.execute(sql='insert into staff(staff_id,staff_name,department,salary,phone_number) values(%s,%s,%s,%s,%s)',
@@ -19,6 +22,7 @@ def staff_route(app: Flask):
         return JsonResponse.success(msg='添加成功') if not isOk else JsonResponse.fail(msg='添加失败')
 
     @app.route("/update_staff", methods=["PUT"])  # 修改（单个）
+    @log_route
     def update_staff():
         # request.data获取请求体数据
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
@@ -31,6 +35,7 @@ def staff_route(app: Flask):
 
 
     @app.route("/delete_staff", methods=["DELETE"])  # 删除（单个）
+    @log_route
     def delete_staff():
         # request.args获取请求链接中 ? 后面的所有参数；以字典的方式存储
         if 'staff_id' not in request.args:

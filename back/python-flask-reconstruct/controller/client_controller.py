@@ -3,6 +3,10 @@ from json_response import JsonResponse
 from database.database import db
 import json
 from log.logger import log_route
+<<<<<<< HEAD
+=======
+
+>>>>>>> be86ad99efc87cb1469f59afa91a0b006693e835
 def client_route(app: Flask):
     # client表
     
@@ -14,6 +18,7 @@ def client_route(app: Flask):
 
     @log_route
     @app.route("/add_client", methods=["POST"])  # 添加（单个）
+    @log_route
     def add_client():
         data = json.loads(request.data)  # 将json字符串转为dict
         # 添加操作成功，返回None；失败，返回异常
@@ -24,6 +29,7 @@ def client_route(app: Flask):
 
     @log_route
     @app.route("/update_client", methods=["PUT"])  # 修改（单个）
+    @log_route
     def update_client():
         # request.data获取请求体数据
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
@@ -37,6 +43,7 @@ def client_route(app: Flask):
 
     @log_route
     @app.route("/delete_client", methods=["DELETE"])  # 删除（单个）
+    @log_route
     def delete_client():
         # request.args获取请求链接中 ? 后面的所有参数；以字典的方式存储
         if 'client_id' not in request.args:

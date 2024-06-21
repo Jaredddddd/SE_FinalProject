@@ -1,6 +1,8 @@
 # Ignore __pycache__ directories
 __pycache__/
 controller/__pycache__/
+*/__pycache__/
 
 # Ignore all .log files
 *.log
+

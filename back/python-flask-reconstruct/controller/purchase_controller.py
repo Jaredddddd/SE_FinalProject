@@ -3,16 +3,19 @@ from json_response import JsonResponse
 from database.database import db
 import json
 from datetime import datetime
+from log.logger import log_route
 
 def purchase_route(app: Flask):
     # purchase表
     @app.route("/all_purchase", methods=["GET"])  # 查询（全部）
+    @log_route
     def all_purchase():
         result = db.execute(sql='select * from purchase')
         return JsonResponse.success(msg='查询成功', data=result)
 
 
     @app.route("/add_purchase", methods=["POST"])  # 添加（单个）
+    @ log_route
     def add_purchase():
         data = json.loads(request.data)  # 将json字符串转为dict
         isOk = db.execute(sql='insert into purchase(purchase_id,staff_id,goods_id,purchase_price,purchase_num,purchase_amount,purchase_date) values(%s,%s,%s,%s,%s,%s,%s)',
@@ -22,6 +25,7 @@ def purchase_route(app: Flask):
 
 
     @app.route("/update_purchase", methods=["PUT"])  # 修改（单个）
+    @log_route
     def update_purchase():
         # request.data获取请求体数据
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
@@ -35,6 +39,7 @@ def purchase_route(app: Flask):
 
 
     @app.route("/delete_purchase", methods=["DELETE"])  # 删除（单个）
+    @log_route
     def delete_purchase():
         # request.args获取请求链接中 ? 后面的所有参数；以字典的方式存储
         if 'purchase_id' not in request.args:
