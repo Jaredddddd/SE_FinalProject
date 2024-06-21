@@ -3,13 +3,9 @@ from json_response import JsonResponse
 from database.database import db
 import json
 from log.logger import log_route
-<<<<<<< HEAD
-=======
 
->>>>>>> be86ad99efc87cb1469f59afa91a0b006693e835
 def client_route(app: Flask):
     # client表
-    
     @app.route("/all_client", methods=["GET"])  # 查询（全部）
     @log_route
     def all_client():
