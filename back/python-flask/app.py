@@ -14,7 +14,9 @@ app = JsonFlask(__name__)
 CORS(app, supports_credentials=True)
 
 # 数据库连接对象
-db = SQLManager()
+# db = SQLManager()
+# 使用单例模式
+db = SQLManager.get_instance()
 
 
 # 编写视图函数，绑定路由
