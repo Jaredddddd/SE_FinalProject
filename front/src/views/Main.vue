@@ -95,7 +95,8 @@ export default {
 /* background-size: 1500px 900px;  width height */
 .main-container {
   background-image: url('../assets/sysu3.jpg');
-  background-size: 1400px 900px;   
+  /* background-size: 1400px 900px;    */
+  background: cover;
   /* background-image: url('../assets/sysu100.png');
   background-size: 400px 400px;  
   background-position: 40% 50%;  */
