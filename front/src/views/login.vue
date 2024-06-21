@@ -38,6 +38,7 @@
                   <el-row v-if="errorMessage" style="color: red; margin-top: 10px;">
                     {{ errorMessage }}
                   </el-row>
+                  
                 </el-tab-pane>
                 <el-tab-pane label="注册" name="register">
                   <el-form ref="registerForm" :model="registerForm" :rules="registerFormRules" class="form">
@@ -279,8 +280,8 @@ a:hover {
   .loginRight {
     width: 450px;
     height: 420px;
-    background-color: rgb(7, 77, 33);
-    border: 1px solid rgb(241, 242, 241);
+    background-color: rgba(128, 118, 118, 0.184);
+    border: 1px solid rgb(117, 174, 117);
     box-shadow: 0px 2px 15px 1px rgba(240, 239, 239, 0.1);
     border-radius: 5px;
     margin-top: 95px;
@@ -335,16 +336,16 @@ a:hover {
   .login-btn {
     width: 390px;
     height: 50px;
-    background: radial-gradient(circle, rgba(174, 8, 8, 0.992), rgb(179, 4, 4));
-    border: 2px solid #61c8c5;
+    background: radial-gradient(circle, rgba(7, 90, 29, 0.992), rgb(6, 85, 37));
+    border: 2px solid #dde8e8;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.21);
     border-radius: 4px;
   }
   .register-btn {
     width: 390px;
     height: 50px;
-    background: radial-gradient(circle, rgba(174, 8, 8, 0.992), rgb(179, 4, 4));
-    border: 2px solid #61c8c5;
+    background: radial-gradient(circle, rgba(7, 90, 29, 0.992), rgb(6, 85, 37));
+    border: 2px solid #e1e8e8;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.21);
     border-radius: 4px;
     margin-top: 5px; /* 调整注册按钮的位置 */
