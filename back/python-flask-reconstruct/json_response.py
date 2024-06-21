@@ -11,6 +11,7 @@ class JsonResponse(object):
 
     # @classmethod修饰符对应的函数不需要实例化，不需要 self 参数，
     # 但第一个参数需要是表示自身类的 cls 参数，可以来调用类的属性，类的方法，实例化对象等
+    # cls 代表类本身
     @classmethod
     def success(cls, code=200, msg='success', data=None):
         return cls(code, msg, data)

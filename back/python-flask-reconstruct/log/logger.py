@@ -11,7 +11,7 @@ console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
 
 # 创建一个文件处理器
-file_handler = logging.FileHandler('./app.log', mode='a')
+file_handler = logging.FileHandler('app.log', mode='a')
 file_handler.setLevel(logging.INFO)
 
 # 创建格式器
