@@ -149,12 +149,14 @@ export default {
       this.$axios.post("/login", this.form).then((res) => {
         if (res.code == 200) {
           this.$notify.success({ title: "成功", message: res.msg, duration: 2000 });
-          // 根据用户名跳转到不同页面
-          if (this.form.username === 'admin') {
+          // 打印放回的数据
+          // console.log(res.data);
+          // 根据用户身份跳转到不同页面
+          if (res.data.identity === 'manager') {
             this.$router.push('/manager');
-          } else if (this.form.username === 'buyer') {
+          } else if (res.data.identity === 'buyer') {
             this.$router.push('/buyer');
-          } else if (this.form.username === 'saler') {
+          } else if (res.data.identity === 'saler') {
             this.$router.push('/saler');
           } else {
             // 默认跳转到 main 页面
