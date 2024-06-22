@@ -13,7 +13,7 @@
           <div class="loginBg"></div>
           <div class="loginRight">
             <Row class="loginRow">
-              <el-tabs v-model="tabName" @tab-click="changeTabName" class="loginTab" style="width: 390px; height: 30px;margin: 0 auto;" >
+              <el-tabs v-model="tabName" @tab-click="changeTabName" class="loginTab" style="width: 390px; height: 30px;margin: 0 auto">
                 <el-tab-pane label="账号密码登录" name="userAndPassword" class="zhanghaomima">
                   <el-form ref="usernameLoginForm" :model="form" :rules="usernameLoginFormRules" class="form">
                     <el-form-item prop="username" class="loginInput">
@@ -24,7 +24,9 @@
                       </el-row>
                     </el-form-item>
                     <el-form-item prop="password">
-                      <el-input style="height: 50px; line-height: 50px" type="password" v-model="form.password" size="large" placeholder="请输入登录密码" password autocomplete="off">
+                      <el-input v-model="form.password" size="large" type="password" placeholder="请输入登录密码" autocomplete="off" style="margin-top: 55px">
+                        
+                      <!-- <el-input style="height: 50px; line-height: 50px" type="password" v-model="form.password" size="large" placeholder="请输入登录密码" autocomplete="off"> -->
                         <i class="iconfont icon-mima1" slot="prefix" style="line-height: 50px"></i>
                       </el-input>
                     </el-form-item>
@@ -38,10 +40,16 @@
                   <el-row v-if="errorMessage" style="color: red; margin-top: 10px;">
                     {{ errorMessage }}
                   </el-row>
-                  
                 </el-tab-pane>
                 <el-tab-pane label="注册" name="register">
                   <el-form ref="registerForm" :model="registerForm" :rules="registerFormRules" class="form">
+                    <el-form-item prop="identity">
+                      <el-select v-model="registerForm.identity" placeholder="请选择身份">
+                        <el-option label="管理员" value="manager"></el-option>
+                        <el-option label="进货员" value="buyer"></el-option>
+                        <el-option label="销售员" value="saler"></el-option>
+                      </el-select>
+                    </el-form-item>
                     <el-form-item prop="username">
                       <el-input v-model="registerForm.username" size="large" clearable placeholder="注册账号" autocomplete="off">
                         <i class="iconfont icon-yonghu" slot="prefix" style="line-height: 50px"></i>
@@ -281,7 +289,7 @@ a:hover {
   //账号密码的方框
   .loginRight {
     width: 450px;
-    height: 420px;
+    height: 490px;
     background-color: rgba(128, 118, 118, 0.184);
     border: 1px solid rgb(117, 174, 117);
     box-shadow: 0px 2px 15px 1px rgba(240, 239, 239, 0.1);
@@ -323,25 +331,34 @@ a:hover {
   }
 
   .loginInput {
+    position: relative; /* 相对定位 */
+    top: 45px; /* 向下移动50像素 */
     font-size: 18px;
     font-family: Microsoft YaHei;
     font-weight: bold;
     color: #be3131;
   }
 
-
+  // .login-password {
+  //   position: relative; /* 相对定位 */
+  //   top: 55px; /* 向下移动50像素 */
+  //   // margin-top: 65px; /* 根据需要调整这个值 */
+  // }
   .ivu-tabs-bar {
     border-bottom: 0px;
     color: #f6f6f6;
   }
   //登陆方框
   .login-btn {
+    position: relative; /* 相对定位 */
+    top: 0px; /* 向下移动50像素 */
     width: 390px;
     height: 50px;
     background: radial-gradient(circle, rgba(7, 90, 29, 0.992), rgb(6, 85, 37));
     border: 2px solid #dde8e8;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.21);
     border-radius: 4px;
+    margin-top: 5px; /* 调整登录按钮的位置 */
   }
   .register-btn {
     width: 390px;
@@ -470,7 +487,9 @@ a:hover {
   color: #f6f6f6 !important;
 }
 
-
+.el-tabs__content {
+  overflow: visible !important; /* 或者使用 'visible'，根据你的需求 */
+}
 
 
 // //账号密码样式
