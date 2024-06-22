@@ -17,6 +17,8 @@ def good_route(app: Flask):
     @log_route
     def add_goods():
         data = json.loads(request.data)  # 将json字符串转为dict
+        if len(data) != 3:  
+            return JsonResponse.fail(msg='需要传入完整信息')
         isOk = db.execute(sql='insert into goods(goods_id,goods_name,goods_num) values(%s,%s,%s)',
                         args=[data['goods_id'], data['goods_name'], data['goods_num']])
         # python三元表达式
@@ -30,8 +32,8 @@ def good_route(app: Flask):
         # request.data获取请求体数据
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
         data = json.loads(request.data)  # 将json字符串转为dict
-        if 'goods_id' not in data:  # 改为form里对应的xx_id
-            return JsonResponse.fail(msg='需要传入goods_id')
+        if len(data) != 5:  # 改为form里对应的xx_id
+            return JsonResponse.fail(msg='需要传入完整信息')
         isOk = db.execute(sql='update goods set goods_name=%s,goods_num=%s where goods_id=%s',  # 改为
                         args=[data['goods_name'], data['goods_num'], data['goods_id']])
         return JsonResponse.success(msg='修改成功') if not isOk else JsonResponse.fail(msg='商品编号不可修改')

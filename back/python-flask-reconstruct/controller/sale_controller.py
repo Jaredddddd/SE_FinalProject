@@ -17,6 +17,8 @@ def sale_route(app: Flask):
     @log_route
     def add_sale():
         data = json.loads(request.data)  # 将json字符串转为dict
+        if len(data) != 7:
+            return JsonResponse.fail(msg='请填写完整信息')
         isOk = db.execute(sql='insert into sale(sale_id, client_id, goods_id, sale_price, sale_num, sale_amount, sale_date) values(%s,%s,%s,%s,%s,%s,%s)',
                         args=[data['sale_id'], data['client_id'], data['goods_id'], data['sale_price'], data['sale_num'], data['sale_amount'], data['sale_date']])
         # python三元表达式

@@ -16,6 +16,8 @@ def staff_route(app: Flask):
     @log_route
     def add_staff():
         data = json.loads(request.data)  # 将json字符串转为dict
+        if len(data) != 5:  
+            return JsonResponse.fail(msg='请输入完整信息') 
         isOk = db.execute(sql='insert into staff(staff_id,staff_name,department,salary,phone_number) values(%s,%s,%s,%s,%s)',
                         args=[data['staff_id'], data['staff_name'], data['department'], data['salary'],  data['phone_number']])
         # python三元表达式
