@@ -30,7 +30,7 @@ def staff_route(app: Flask):
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
         data = json.loads(request.data)  # 将json字符串转为dict
         # 修复重置报错问题
-        if len(data) != 5:  # 改为form里对应的xx_id
+        if len(data) != 5:  
             return JsonResponse.fail(msg='请输入完整信息')
         isOk = db.execute(sql='update staff set staff_name=%s,department=%s,salary=%s,phone_number=%s where staff_id=%s',  # 改为
 
