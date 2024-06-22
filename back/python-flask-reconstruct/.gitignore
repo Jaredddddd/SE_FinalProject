@@ -5,3 +5,6 @@ __pycache__/
 # Ignore all .log files
 *.log
 
+# Ignore the config of database
+database/config.py
+
