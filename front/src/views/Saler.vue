@@ -42,12 +42,12 @@
                   <router-link to="/saler/sale" class="link-text">销售信息表</router-link>
                 </span>
               </el-menu-item>
-              <!-- <el-menu-item index="3">
+              <el-menu-item index="3">
                 <i class="el-icon-document"></i>
                 <span slot="title">
-                  <router-link to="/saler/commodity" class="link-text">商品信息表</router-link>
+                  <router-link to="/saler/client" class="link-text">客户信息表</router-link>
                 </span>
-              </el-menu-item> -->
+              </el-menu-item>
               <!-- <el-menu-item index="4">
                 <i class="el-icon-setting"></i>
                 <span slot="title">
