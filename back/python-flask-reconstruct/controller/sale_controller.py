@@ -36,3 +36,11 @@ def sale_route(app: Flask):
         isOk = db.execute(sql='update sale set client_id=%s,goods_id=%s,sale_price=%s,sale_num=%s,sale_amount=%s,sale_date=%s where sale_id=%s',  # 改为
                         args=[data['client_id'], data['goods_id'], data['sale_price'], data['sale_num'], data['sale_amount'], sale_date, data['sale_id']])
         return JsonResponse.success(msg='修改成功') if not isOk else JsonResponse.fail(msg='修改失败')
+
+    @app.route("/delete_sale", methods=["DELETE"])  # 删除（单个）
+    @log_route
+    def delete_sale():
+        if 'sale_id' not in request.args:
+            return JsonResponse.fail(msg='需要传入sale_id')
+        isOk = db.execute(sql='delete from sale where sale_id=%s', args=[request.args['sale_id']])
+        return JsonResponse.success(msg='销售表删除成功') if not isOk else JsonResponse.fail(msg='销售表删除失败')
