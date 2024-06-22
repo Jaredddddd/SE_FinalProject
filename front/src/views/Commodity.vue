@@ -218,7 +218,7 @@ export default {
           this.init(); // 重新初始化数据
         } else {
           // 如果失败，显示失败的通知
-          this.$notify.success({
+          this.$notify.error({
             title: "失败",
             message: res.msg,
             duration: 2000,
