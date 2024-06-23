@@ -32,7 +32,7 @@ def good_route(app: Flask):
         # request.data获取请求体数据
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
         data = json.loads(request.data)  # 将json字符串转为dict
-        if len(data) != 5:  # 改为form里对应的xx_id
+        if len(data) != 3:  # 改为form里对应的xx_id
             return JsonResponse.fail(msg='需要传入完整信息')
         isOk = db.execute(sql='update goods set goods_name=%s,goods_num=%s where goods_id=%s',  # 改为
                         args=[data['goods_name'], data['goods_num'], data['goods_id']])

@@ -1,0 +1,5 @@
+Flask==3.0.3
+PyMySQL==1.1.1
+Flask-Cors==4.0.1
+Flask-JSON==0.4.0
+pyramid_json_response==0.0.1
