@@ -1,3 +1,7 @@
+"""
+The State Pattern is inspired by code from 
+https://github.com/Supremacy-ysyyrps/SoftwareEngineering/blob/aea6e52aba3b231a2546015ad0827321f26ff46b/code/rear-end/dal/database.py#L73
+"""
 
 class State:
     def __init__(self, database):
