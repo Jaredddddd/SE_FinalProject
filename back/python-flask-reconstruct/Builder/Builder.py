@@ -84,7 +84,6 @@ class App:
         routebuilder.buildSaleRoute()
         routebuilder.buildRegisterRoute()
         self.app = routebuilder.get_result()
-        print("Successfully create an app!")
 
     # 指定self.app在特定端口运行
     def run(self, host, port, debug):
