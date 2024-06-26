@@ -40,7 +40,7 @@ def sale_route(app: Flask):
     @app.route("/delete_sale", methods=["DELETE"])  # 删除（单个）
     @log_route
     def delete_sale():
-        if 'sale_id' not in request.args:
-            return JsonResponse.fail(msg='需要传入sale_id')
+        # if 'sale_id' not in request.args:
+        #     return JsonResponse.fail(msg='需要传入sale_id')
         isOk = db.execute(sql='delete from sale where sale_id=%s', args=[request.args['sale_id']])
         return JsonResponse.success(msg='销售表删除成功') if not isOk else JsonResponse.fail(msg='销售表删除失败')

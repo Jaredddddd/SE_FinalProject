@@ -18,8 +18,8 @@ def purchase_route(app: Flask):
     @ log_route
     def add_purchase():
         data = json.loads(request.data)  # 将json字符串转为dict
-        if len(data) != 7:
-            return JsonResponse.fail(msg='请填写完整进货信息')
+        # if len(data) != 7:
+        #     return JsonResponse.fail(msg='请填写完整进货信息')
         isOk = db.execute(sql='insert into purchase(purchase_id,staff_id,goods_id,purchase_price,purchase_num,purchase_amount,purchase_date) values(%s,%s,%s,%s,%s,%s,%s)',
                         args=[data['purchase_id'], data['staff_id'], data['goods_id'], data['purchase_price'], data['purchase_num'], data['purchase_amount'], data['purchase_date']])
         # python三元表达式
@@ -32,8 +32,8 @@ def purchase_route(app: Flask):
         # request.data获取请求体数据
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
         data = json.loads(request.data)  # 将json字符串转为dict
-        if len(data) != 5:  # 改为form里对应的xx_id
-            return JsonResponse.fail(msg='请填写完整信息')
+        # if len(data) != 5:  # 改为form里对应的xx_id
+        #     return JsonResponse.fail(msg='请填写完整信息')
         sale_date = datetime.strptime(data['sale_date'], '%a, %d %b %Y %H:%M:%S %Z').strftime('%Y-%m-%d')
         isOk = db.execute(sql='update purchase set staff_id=%s, goods_id=%s, purchase_price=%s, purchase_num=%s, purchase_amount=%s, purchase_date=%s  where purchase_id=%s',  # 改为
                         args=[data['staff_id'], data['goods_id'], data['purchase_price'], data['purchase_num'], data['purchase_amount'], sale_date])

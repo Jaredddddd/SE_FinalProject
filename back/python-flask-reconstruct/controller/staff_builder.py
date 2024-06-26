@@ -16,8 +16,8 @@ def staff_route(app: Flask):
     @log_route
     def add_staff():
         data = json.loads(request.data)  # 将json字符串转为dict
-        if len(data) != 5:  
-            return JsonResponse.fail(msg='请输入完整信息') 
+        # if len(data) != 5:  
+        #     return JsonResponse.fail(msg='请输入完整信息') 
         isOk = db.execute(sql='insert into staff(staff_id,staff_name,department,salary,phone_number) values(%s,%s,%s,%s,%s)',
                         args=[data['staff_id'], data['staff_name'], data['department'], data['salary'],  data['phone_number']])
         # python三元表达式
@@ -30,8 +30,9 @@ def staff_route(app: Flask):
         # 前端在发送请求时，由于指定了Content-Type为application/json；故request.data获取到的就是json数据
         data = json.loads(request.data)  # 将json字符串转为dict
         # 修复重置报错问题
-        if len(data) != 5:  
-            return JsonResponse.fail(msg='请输入完整信息')
+        # if len(data) != 5:  
+        #     return JsonResponse.fail(msg='请输入完整信息')
+        print(len(data))
         isOk = db.execute(sql='update staff set staff_name=%s,department=%s,salary=%s,phone_number=%s where staff_id=%s',  # 改为
 
                         args=[data['staff_name'], data['department'], data['salary'], data['phone_number'], data['staff_id']])

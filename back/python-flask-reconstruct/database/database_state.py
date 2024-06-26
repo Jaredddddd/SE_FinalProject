@@ -15,7 +15,6 @@ class ExeState(State):
     def __init__(self, database):
         super().__init__(database)
     def exe(self, cmd, args):
-        # 通过调用cursor.execute()方法对数据库进行操作
         self.db.cursor.execute(cmd, args)
         print('executing sql')
 
@@ -23,7 +22,6 @@ class RollState(State):
     def __init__(self, database):
         super().__init__(database)
     def roll(self):
-        # 使用con.rollback()回滚事务，保护数据库一致性
         self.db.conn.rollback()
         print('rollback successfully')
 
