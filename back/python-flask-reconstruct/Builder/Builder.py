@@ -90,4 +90,10 @@ class App:
         self.app.run(host=host, port=port, debug=debug)
 
     def __del__(self):
+        """
+        类实例销毁时的钩子函数。
+        
+        当类的实例被垃圾回收器回收时，这个方法会被调用。它主要用于执行一些清理工作或输出一些信息。
+        本例中，它用于提示应用程序已被成功销毁。
+        """
         print("Successfully destroy the app!")
